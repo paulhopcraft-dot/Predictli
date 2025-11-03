@@ -1,0 +1,1 @@
+import { db } from '../db/index.js'; import { evt_event } from '../db/schema.js'; export async function publishEvent(topic:string, payload:any){ await db.insert(evt_event).values({ topic, payload: JSON.stringify(payload), attempts:0, processed:false }); }

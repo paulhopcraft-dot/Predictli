@@ -1,0 +1,1 @@
+import { Router } from 'express'; import { db } from '../../db/index.js'; export const telemetryApi=Router(); telemetryApi.get('/metrics/events-count', async (_req,res)=>{ const r:any = await db.execute({ sql:"select topic, count(*) as cnt from evt_event group by topic order by cnt desc", params:[] } as any); res.json({ items: r.rows||[] }); });

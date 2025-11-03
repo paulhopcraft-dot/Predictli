@@ -1,0 +1,27 @@
+openapi: 3.0.3
+info:
+  title: Predictli v5.0-beta API
+  version: 5.0.0-beta
+paths:
+  /api/health:
+    get: { summary: Health, responses: { '200': { description: OK } } }
+  /api/auth/login:
+    post: { summary: Login, responses: { '200': { description: OK } } }
+  /api/factory/register:
+    post: { summary: Register to Control Tower, responses: { '200': { description: OK } } }
+  /api/candidates:
+    post: { summary: Create candidate, responses: { '201': { description: Created } } }
+  /api/jobs:
+    post: { summary: Create job, responses: { '201': { description: Created } } }
+  /api/matches:
+    post: { summary: Create match, responses: { '201': { description: Created } } }
+  /api/webhooks/freshdesk:
+    post: { summary: Freshdesk job order, responses: { '201': { description: Created } } }
+  /api/metrics/events-count:
+    get: { summary: Event counts, responses: { '200': { description: OK } } }
+  /api/admin/summary:
+    get: { summary: Admin summary (JWT), responses: { '200': { description: OK } } }
+  /api/finance/record:
+    post: { summary: Record finance event (JWT), responses: { '200': { description: OK } } }
+  /api/matches/recent:
+    get: { summary: Recent matches (JWT), responses: { '200': { description: OK } } }
