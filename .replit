@@ -37,10 +37,6 @@ externalPort = 3001
 localPort = 5000
 externalPort = 80
 
-[[ports]]
-localPort = 32887
-externalPort = 3000
-
 [deployment]
 deploymentTarget = "autoscale"
 run = ["bash", "-c", "cd predictli-v5.0-beta && node dist/server.js & cd ui && npx serve -s dist -l 5000"]
