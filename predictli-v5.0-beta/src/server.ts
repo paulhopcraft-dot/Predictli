@@ -10,14 +10,29 @@ const app = express();
 app.use(helmet({
   contentSecurityPolicy: false,
 }));
+
+const allowedOrigins = [
+  'http://localhost:5000',
+  /^https:\/\/.*\.replit\.dev$/,
+  /^https:\/\/.*\.repl\.co$/,
+];
+
 app.use(cors({
-  origin: true,
+  origin: (origin, callback) => {
+    if (!origin || allowedOrigins.some(allowed => 
+      typeof allowed === 'string' ? allowed === origin : allowed.test(origin)
+    )) {
+      callback(null, true);
+    } else {
+      callback(null, false);
+    }
+  },
   credentials: true,
 }));
+
 app.use(express.json({ limit: '1mb' }));
 app.use(rateLimit({ windowMs: 60000, max: 120 }));
 app.use(api);
 app.get('/', (_req, res) => res.send(`Predictli ${env.FACTORY_MODULE_ID} v5.0-beta`));
 
-const HOST = 'localhost';
-app.listen(env.PORT, HOST, () => console.log(`🚀 Predictli v5.0-beta listening on ${HOST}:${env.PORT}`));
+app.listen(env.PORT, '0.0.0.0', () => console.log(`🚀 Predictli v5.0-beta listening on 0.0.0.0:${env.PORT}`));
